@@ -49,7 +49,8 @@ sudo usermod -aG input $USER     # for the hotkey; log in again afterwards
 The .deb bundles sherpa-onnx (Ubuntu doesn't ship it) and is pinned to Ubuntu 26.04's
 python3 (3.14). It replaces the predecessor apps `voice-to-hebrish`, `codeswitch-dictation`
 and `parakeet-dictation` (Parakeet-Type-Ubuntu), so only one dictation app is installed, and
-on first start it adopts Voice To Hebrish's settings and downloaded model. On
+on first start it adopts Voice To Hebrish's settings and downloaded model. It can be
+installed alongside Hebrish (package `hebrish`); give the two different hotkeys. On
 other Ubuntu releases, run `./install.sh` (a per-user venv; needs uv) or rebuild with
 `./build-deb.sh`.
 

@@ -5,6 +5,12 @@ that suits how you talk: stock Parakeet, or a fine-tune of it.
 
 ![Parlance on Linux: the Model tab, choosing between stock Parakeet and the fine-tunes](docs/screenshots/desktop-model.png)
 
+**Parlance is the general-purpose app**: every model, for everyday dictation. Its sister
+project [**Hebrish**](https://github.com/Hebrish-ASR/Hebrish-Dictation) ([hebrish.app](https://hebrish.app))
+is built from the same code but is only for the English-Hebrew code-switching model. The two
+are separate apps with separate package names, app IDs, settings and default hotkeys, so they
+can be installed side by side (see [Parlance and Hebrish](#parlance-and-hebrish)).
+
 Everything runs **on your device**. The only network traffic is downloading the model you
 pick (~630 MB, once) and a periodic check for a newer version.
 
@@ -28,7 +34,7 @@ in the apps by themselves once published: both apps re-read the catalogue
 On held-out recordings, the code-switching model (v3, the latest benchmarked version) cut
 word error rate on code-switched English from 10.9% to 5.3%, and plain English got slightly
 better, not worse. Training data, every version's results and the roadmap:
-[English-Hebrew-Codeswitching-Parakeet-Finetune](https://github.com/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Finetune).
+[English-Hebrew-Codeswitching-Parakeet-Finetune](https://github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune).
 
 ## Download
 
@@ -77,10 +83,32 @@ Releases: tag `android-vX.Y.Z` builds the signed APK in CI. Tag `desktop-vX.Y.Z`
 Windows zip in CI; the Ubuntu .deb is built with `desktop/build-deb.sh` and added to the same
 release. Adding a model needs no release: see `shared/update-protocol.md`.
 
+## Parlance and Hebrish
+
+Both apps come from one codebase and keep the same feature set. What differs is the purpose and
+every identifier, so that both can be installed together:
+
+| | Parlance | Hebrish |
+| --- | --- | --- |
+| Purpose | General dictation, every model | The English-Hebrew code-switching model only |
+| Repo | `danielrosehill/Parlance-Dictation` | `Hebrish-ASR/Hebrish-Dictation` |
+| Debian package / command | `parlance` | `hebrish` |
+| Android app ID | `com.danielrosehill.parlance` | `com.danielrosehill.hebrish` |
+| Linux config / data | `~/.config/parlance`, `~/.local/share/parlance` | `~/.config/hebrish`, `~/.local/share/hebrish` |
+| Default hotkey (desktop) | `F13` | `F14` |
+
+The desktop hotkey listener reads `/dev/input` without grabbing the device, so if both apps are
+bound to the same key, a press fires both. Give each app its own key (Dictate tab).
+
+**Hebrish 0.1.1 and 0.1.2 were released under Parlance's identifiers** (package `parlance`,
+app ID `com.danielrosehill.parlance`), because the Hebrish rebrand of 2026-10-19 changed only
+the display name. Parlance 0.2.0 installs over them and keeps their settings and models;
+Hebrish 0.2.0 and later are a separate install.
+
 ## History
 
 Parlance (2026-10-19) is the successor to all of the author's earlier Parakeet dictation
-apps, and the only one maintained:
+apps, and the general-purpose one ([Hebrish](https://github.com/Hebrish-ASR/Hebrish-Dictation) is its code-switching sibling):
 
 - **Voice To Hebrish** (2026-10-18), the Android + desktop monorepo this repo was copied
   from, history included. It ran only the code-switching model.
@@ -88,6 +116,11 @@ apps, and the only one maintained:
   and *English-Hebrew-Codeswitching-Dictation-Linux* ("Codeswitch Dictation").
 - **Parakeet-Type-Ubuntu** (`parakeet-dictation`), a KDE-only app with stock and
   code-switching profiles.
+
+Later on 2026-10-19 the original Parlance repo was moved to the Hebrish-ASR organisation and
+renamed Hebrish-Dictation. This repo was then re-created from it with history kept (from the
+Parlance 0.1.0 commit plus two later desktop fixes), so that Parlance stays the general app and
+Hebrish the code-switching one.
 
 ## License
 

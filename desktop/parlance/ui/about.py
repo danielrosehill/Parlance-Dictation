@@ -1,13 +1,13 @@
 """The About tab: what the app is, the models it offers, and how the code-switching model scores.
 
-Code-switching numbers come from the project hub, github.com/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Finetune
+Code-switching numbers come from the project hub, github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune
 (sections "Results" and "Training data"). Update BENCH and TRAINING when a new version is
 benchmarked; v4 was released before its benchmark, so v3 is still the latest measured.
 """
 
 from .. import __version__, model_store
 
-HUB = "https://github.com/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Finetune"
+HUB = "https://github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune"
 MODEL = "https://huggingface.co/danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching"
 LEADERBOARD = "https://huggingface.co/spaces/danielrosehill/English-Hebrew-Codeswitching-ASR-Leaderboard"
 DEMO = "https://huggingface.co/spaces/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Demo"

@@ -1,6 +1,6 @@
 # Parlance for Android: on-device voice keyboard
 
-[![Download APK v0.1.0](https://img.shields.io/badge/Download_APK-v0.1.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.1.0/Parlance-v0.1.0.apk)
+[![Download APK v0.2.0](https://img.shields.io/badge/Download_APK-v0.2.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.2.0/Parlance-v0.2.0.apk)
 
 > **Early testing build.** Not yet run on a device under this name; see
 > [`docs/maintaining.md`](docs/maintaining.md) for what is verified.
@@ -37,7 +37,7 @@ them.
 1. Install **[HeliBoard](https://github.com/Helium314/HeliBoard/releases)** and make it your
    main keyboard.
 2. Download the APK from the
-   [APK (v0.1.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.1.0/Parlance-v0.1.0.apk)
+   [APK (v0.2.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.2.0/Parlance-v0.2.0.apk)
    and install it. You will need to allow installs from your browser or file manager.
 3. Open **Parlance** and work through it:
    - **Pick a model** and **Download** it. It is about 660 MB, downloaded once; use Wi-Fi.
@@ -114,7 +114,7 @@ attaches it to a GitHub release. Maintainer notes are in [`docs/maintaining.md`]
 ## Related
 
 - Code-switching fine-tune project:
-  [English-Hebrew-Codeswitching-Parakeet-Finetune](https://github.com/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Finetune)
+  [English-Hebrew-Codeswitching-Parakeet-Finetune](https://github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune)
 
 ## License
 

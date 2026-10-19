@@ -171,3 +171,14 @@ libs in the bundled .so files, and `--toggle` record → transcribe ran from `/u
   `evdev.UInput`. Wait ≥4 s after creating the device: the listener rescans every 3 s.
 - When killing a test instance, don't `pkill -f parlance`: the pattern also
   matches the shell running the command.
+
+## Coexistence with Hebrish (2026-10-19)
+
+Hebrish (`Hebrish-ASR/Hebrish-Dictation`) is a fork of this codebase that runs only the
+code-switching model. The two are kept installable side by side: Parlance owns `parlance`
+(package, command, module, `~/.config/parlance`, uinput device `parlance-keyboard`, default
+hotkey F13); Hebrish owns `hebrish` with default hotkey F14. Neither package Conflicts with
+the other. The evdev listener does not grab devices (V: no `EVIOCGRAB` in `hotkey_evdev.py`),
+so two apps on one key both fire; distinct keys are the only separation. Hebrish 0.1.1/0.1.2
+shipped as package `parlance`, so Parlance 0.2.0 upgrades them in place (V on daniellaptop,
+2026-10-19). Keep feature changes flowing both ways by cherry-picking; the branding files differ.

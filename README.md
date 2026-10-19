@@ -93,7 +93,7 @@ every identifier, so that both can be installed together:
 | Purpose | General dictation, every model | The English-Hebrew code-switching model only |
 | Repo | `danielrosehill/Parlance-Dictation` | `Hebrish-ASR/Hebrish-Dictation` |
 | Debian package / command | `parlance` | `hebrish` |
-| Android app ID | `com.danielrosehill.parlance` | `com.danielrosehill.hebrish` |
+| Android app ID | `com.danielrosehill.parlance` | `app.hebrish.dictation` |
 | Linux config / data | `~/.config/parlance`, `~/.local/share/parlance` | `~/.config/hebrish`, `~/.local/share/hebrish` |
 | Default hotkey (desktop) | `F13` | `F14` |
 

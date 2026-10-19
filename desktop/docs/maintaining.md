@@ -176,7 +176,7 @@ libs in the bundled .so files, and `--toggle` record → transcribe ran from `/u
 
 Hebrish (`Hebrish-ASR/Hebrish-Dictation`) is a fork of this codebase that runs only the
 code-switching model. The two are kept installable side by side: Parlance owns `parlance`
-(package, command, module, `~/.config/parlance`, uinput device `parlance-keyboard`, default
+(package, command, module, `~/.config/parlance`, uinput device `parlance-keyboard`; it also ignores `hebrish-keyboard`; default
 hotkey F13); Hebrish owns `hebrish` with default hotkey F14. Neither package Conflicts with
 the other. The evdev listener does not grab devices (V: no `EVIOCGRAB` in `hotkey_evdev.py`),
 so two apps on one key both fire; distinct keys are the only separation. Hebrish 0.1.1/0.1.2

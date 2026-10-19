@@ -17,6 +17,8 @@ from evdev import ecodes
 from .hotkey import HotkeyMachine
 
 OWN_DEVICE_NAME = "parlance-keyboard"     # our uinput paster; never listen to it
+# Pasters of sibling apps that may run alongside (Hebrish, Hebrish-ASR/Hebrish-Dictation).
+IGNORED_DEVICE_NAMES = {OWN_DEVICE_NAME, "hebrish-keyboard"}
 
 
 def key_name(code: int) -> str:
@@ -55,7 +57,7 @@ class EvdevHotkeys(HotkeyMachine):
             except OSError:
                 continue
             keys = dev.capabilities().get(ecodes.EV_KEY, [])
-            if dev.name == OWN_DEVICE_NAME or not any(_is_key(k) for k in keys):
+            if dev.name in IGNORED_DEVICE_NAMES or not any(_is_key(k) for k in keys):
                 dev.close()
                 continue
             self._devices[path] = dev

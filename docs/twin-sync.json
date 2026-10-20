@@ -1,0 +1,13 @@
+{
+  "_comment": "Ledger for keeping Parlance (this repo) and Hebrish (Hebrish-ASR/Hebrish-App, local ~/repos/github/audio-dictation/Hebrish-Dictation) level. Each *_through is the last commit of that repo already reviewed for porting to the other: everything after it is unreviewed. Updated by the asr-dev plugin's sync-hebrish-to-parlance / sync-parlance-to-hebrish skills in the same commit as the port. 'skipped' lists commits reviewed and deliberately not ported, with the reason. What differs on purpose: android/docs/maintaining.md, 'Twin of Hebrish'.",
+  "schema": 1,
+  "hebrish_reviewed_through": "353bfaac1c2f685a5f0ef19df7188233b18d9bfd",
+  "parlance_reviewed_through": "c5613852ceb96fe699f2e1996540434a3f529d6f",
+  "verified": "2026-10-20",
+  "skipped": [
+    {"repo": "hebrish", "commit": "353bfaa", "why": "Hebrish-only: removes the tech and personal fine-tunes from Hebrish's catalogue"},
+    {"repo": "hebrish", "commit": "6202ce1", "why": "Hebrish repo renames (Hebrish-App, Hebrish-Website)"},
+    {"repo": "hebrish", "commit": "fe90fb9..d023104", "why": "Hebrish CDN download links and hebrish.app release steps; Parlance releases on GitHub"}
+  ],
+  "baseline": "2026-10-20: Parlance Android 0.4.0/0.5.0 = Hebrish Android 0.4.0/0.5.0 (tree ported file for file, 349cd2f/d21544c + 9231c08 from Hebrish 520b1ae); Parlance desktop 0.3.0 has Hebrish desktop 0.2.2's CDN manifest_url and v1.0 About numbers. Parlance had nothing Hebrish lacked."
+}

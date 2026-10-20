@@ -2,7 +2,7 @@
 
 Written 2026-10-18, as Voice To Hebrish; updated 2026-10-19 for Parlance; 2026-10-20 brought over from Hebrish 0.4.0 (see the next section). (V) = verified, (I) = inferred / not yet tested on a device.
 
-## Twin of Hebrish (0.4.0, 2026-10-20)
+## Twin of Hebrish (0.4.0 and 0.5.0, 2026-10-20)
 
 Parlance and Hebrish (`Hebrish-ASR/Hebrish-App`, local clone `~/repos/github/audio-dictation/Hebrish-Dictation`)
 are one app in two builds: same architecture, same screens, same engine. Parlance offers every model in
@@ -10,7 +10,8 @@ are one app in two builds: same architecture, same screens, same engine. Parlanc
 
 Android 0.4.0 replaced Parlance's pre-split tree (0.2.0, one setup screen, engine in `app/`) with Hebrish
 Android 0.4.0's, file for file, then put Parlance's identity back. The version jumps 0.2.0 → 0.4.0
-(versionCode 4 → 8) so equal versions mean equal features. Everything that differs on purpose:
+(versionCode 4 → 8) so equal versions mean equal features; 0.5.0 (code 9) = Hebrish 0.5.0 (floating mic
+drag and colour, Hebrish `520b1ae`), never released separately from 0.4.0. Everything that differs on purpose:
 
 | Area | Parlance | Hebrish |
 | --- | --- | --- |

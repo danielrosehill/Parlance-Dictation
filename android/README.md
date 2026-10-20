@@ -1,6 +1,6 @@
 # Parlance for Android: on-device voice keyboard
 
-[![Download APK v0.4.0](https://img.shields.io/badge/Download_APK-v0.4.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.4.0/Parlance-v0.4.0.apk)
+[![Download APK v0.5.0](https://img.shields.io/badge/Download_APK-v0.5.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.5.0/Parlance-v0.5.0.apk)
 
 > **Early testing build.** Not yet run on a device under this name; see
 > [`docs/maintaining.md`](docs/maintaining.md) for what is verified.
@@ -43,7 +43,7 @@ the source, [hebrish.app](https://hebrish.app) (the code-switching model's websi
 1. Install **[HeliBoard](https://github.com/Helium314/HeliBoard/releases)** and make it your
    main keyboard.
 2. Download the APK from the
-   [APK (v0.4.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.4.0/Parlance-v0.4.0.apk)
+   [APK (v0.5.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.5.0/Parlance-v0.5.0.apk)
    and install it. You will need to allow installs from your browser or file manager.
 3. Open **Parlance** and work through it:
    - **Models**: **Download** a model (or **Download all**). It is about 660 MB, downloaded once; use Wi-Fi.

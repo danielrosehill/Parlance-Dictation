@@ -11,7 +11,7 @@ are one app in two builds: same architecture, same screens, same engine. Parlanc
 Android 0.4.0 replaced Parlance's pre-split tree (0.2.0, one setup screen, engine in `app/`) with Hebrish
 Android 0.4.0's, file for file, then put Parlance's identity back. The version jumps 0.2.0 → 0.4.0
 (versionCode 4 → 8) so equal versions mean equal features; 0.5.0 (code 9) = Hebrish 0.5.0 (floating mic
-drag and colour, Hebrish `520b1ae`), never released separately from 0.4.0. Everything that differs on purpose:
+drag and colour, Hebrish `520b1ae`), never released separately from 0.4.0. **0.5.1 (code 10, 2026-10-20) is Parlance-only**: the bundled model catalogue gains Boxty (the no-Hebrew fine-tune) and drops the planned tech and personal entries it replaces; no app code changed, so Hebrish stays at 0.5.0 and the next twin sync should not port it. Everything that differs on purpose:
 
 | Area | Parlance | Hebrish |
 | --- | --- | --- |

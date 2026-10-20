@@ -23,8 +23,7 @@ run with sherpa-onnx (int8).
 | --- | --- | --- |
 | **Parakeet (stock)** | available | General English, any speaker. NVIDIA's release, unchanged |
 | **English-Hebrew code-switching** | available | English with Hebrew words in it (*teudat zehut*, *arnona*, *bituach leumi*), written in Latin letters. [Model card](https://hebrish.app/models#parakeet); downloaded from the Hebrish CDN |
-| **Technical vocabulary** | coming soon | Software, AI and infrastructure terms |
-| **Personal (general)** | coming soon | General English in the author's voice (Irish-accented), for slightly higher everyday accuracy |
+| **Boxty** (English, no Hebrew) | available | English dictation without Hebrew: software, AI and infrastructure terms, brand names, numbers in digits, Irish-English phrasing, in the author's (Irish-accented) voice. [Model card](https://huggingface.co/Hebrish/Parakeet-TDT-0.6B-v2-Tech-And-Accent); downloaded from the Hebrish CDN. Since 2026-10-20 |
 
 The fine-tunes are trained on **one speaker's voice**, so they work best for voices like that
 one; stock Parakeet is the better choice for anyone else. Models marked *coming soon* appear

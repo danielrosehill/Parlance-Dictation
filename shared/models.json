@@ -3,7 +3,12 @@
   "schema": 1,
   "catalogue_url": "https://raw.githubusercontent.com/danielrosehill/Parlance-Dictation/main/shared/models.json",
   "default": "stock",
-  "files": ["encoder.int8.onnx", "decoder.int8.onnx", "joiner.int8.onnx", "tokens.txt"],
+  "files": [
+    "encoder.int8.onnx",
+    "decoder.int8.onnx",
+    "joiner.int8.onnx",
+    "tokens.txt"
+  ],
   "version_file": "version.json",
   "model_type": "nemo_transducer",
   "sample_rate": 16000,
@@ -30,16 +35,14 @@
       "manifest_url": "https://cdn.hebrish.app/models/parakeet-codeswitch/latest.json"
     },
     {
-      "id": "tech",
-      "name": "Technical vocabulary",
-      "summary": "Fine-tuned on software, AI and infrastructure terms. One speaker's voice.",
-      "status": "planned"
-    },
-    {
-      "id": "personal",
-      "name": "Personal (general)",
-      "summary": "Fine-tuned on general English in one speaker's voice (Irish-accented), for slightly higher everyday accuracy.",
-      "status": "planned"
+      "id": "boxty",
+      "name": "Boxty: English, no Hebrew",
+      "summary": "Fine-tuned for English dictation without Hebrew: tech vocabulary, brand names, acronyms, numbers in digits, Irish-English phrasing. One speaker's voice (Irish-accented).",
+      "status": "available",
+      "repo": "Hebrish/Boxty-sherpa-onnx-int8",
+      "subdir": "",
+      "card": "https://huggingface.co/Hebrish/Parakeet-TDT-0.6B-v2-Tech-And-Accent",
+      "manifest_url": "https://cdn.hebrish.app/models/parakeet-boxty/latest.json"
     }
   ]
 }

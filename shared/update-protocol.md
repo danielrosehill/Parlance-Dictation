@@ -25,7 +25,9 @@ recognizer loads), `version_file`, `default` (the id selected on a fresh install
 | --- | --- | --- | --- |
 | `stock` | `csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8` (k2-fsa's int8 export of NVIDIA's release; static since 2025-08-16) | *(root)* | `v2` |
 | `codeswitch` | `Hebrish/Jachnun-sherpa-onnx-int8` (since 2026-10-19; named `Hebrish/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching-sherpa-onnx-int8` until 2026-10-20, which redirects with 307) | *(root)* | `rev <sha7>` |
-| `tech`, `personal` | not published yet | | |
+| `boxty` | `Hebrish/Boxty-sherpa-onnx-int8` (since 2026-10-20; ungated mirror of the gated `Hebrish/Parakeet-TDT-0.6B-v2-Tech-And-Accent`; CDN manifest `models/parakeet-boxty/latest.json`) | *(root)* | `rev <sha7>` |
+
+The planned `tech` and `personal` entries were dropped on 2026-10-20 (Parlance 0.5.1 / desktop 0.3.1): Boxty, the no-Hebrew fine-tune, covers both. They were never downloadable, so no install has a folder under those ids; do not reuse them.
 
 **Since Hebrish 0.2.2 / Parlance desktop 0.3.0 and Android 0.4.0 (2026-10-20): the Hebrish CDN.** A catalogue entry may carry `manifest_url`; apps
 that know it use it in place of the Hugging Face API. One GET of

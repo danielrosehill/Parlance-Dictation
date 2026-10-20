@@ -149,12 +149,21 @@ def test_models_are_isolated():
 
 
 def test_planned_models_cannot_be_selected_or_fetched():
-    planned = [m for m in ms.models() if not m.available]
-    assert {m.id for m in planned} >= {"tech", "personal"}
-    with pytest.raises(ValueError):
-        ms.select(planned[0].id)
-    with pytest.raises(RuntimeError):
-        ms.fetch_latest(planned[0].id)
+    # The bundled catalogue has no planned model since 0.3.1 (Boxty replaced tech and personal),
+    # so the test publishes one through the catalogue cache, as a remote catalogue would.
+    bundled = json.loads(ms.BUNDLED_CATALOGUE.read_text())
+    assert "boxty" in {m["id"] for m in bundled["models"] if m["status"] == "available"}
+    ms.save_json(ms.CATALOGUE_CACHE, {**bundled, "models": bundled["models"] + [
+        {"id": "future", "name": "Future", "summary": "", "status": "planned"}]})
+    try:
+        planned = [m for m in ms.models() if not m.available]
+        assert [m.id for m in planned] == ["future"]
+        with pytest.raises(ValueError):
+            ms.select("future")
+        with pytest.raises(RuntimeError):
+            ms.fetch_latest("future")
+    finally:
+        ms.CATALOGUE_CACHE.unlink()
 
 
 def test_bad_cached_catalogue_falls_back_to_bundled():

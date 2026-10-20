@@ -21,7 +21,7 @@ Android 0.4.0's, file for file, then put Parlance's identity back. The version j
 | Help screen | `ContactActivity`, "Help and links" | `ContactActivity`, "Help and contact" |
 | Return-to-keyboard fallback | HeliBoard | Hebrish Keyboard (`app.hebrish.keyboard`), then HeliBoard |
 | Launcher icon | Parlance icon, `@color/accent` background | Hebrish icon, `@color/hebrish_green` |
-| Floating mic idle colour | `@color/bubble_idle` brown `#6D4C41` (Daniel, 2026-10-20: tell the two apart while testing both) | `@color/accent` blue |
+| Floating mic default colour | `Prefs.BUBBLE_COLORS[0]` = brown `#6D4C41` (Daniel, 2026-10-20: tell the two apart while testing both) | `BUBBLE_COLORS[0]` = blue `#24527A` |
 | Catalogue | every model, `catalogue_url` on this repo | stock + code-switching only |
 
 The code-switching model entry is the same in both catalogues: `Hebrish/Jachnun-sherpa-onnx-int8` plus
@@ -240,6 +240,20 @@ everything below that describes runtime behaviour).
   x measured from that side, minus the 4 dp window padding), so the WRAP_CONTENT bar grows
   inwards (children reversed when anchored right). A drag on an edge side saves the nearer
   side; on `free` it saves `bubbleX`.
+- **Drag and look (after 0.4.0, Daniel, 2026-10-20: "drag it around while you're doing it",
+  opacity, background opacity, colour):** every part of the bubble has a `Drag` touch listener:
+  the mic, the timer, each bar button and the root (the bar's padding). `Drag(tap, hold)`:
+  a move past the touch slop is a drag; buttons pass `performClick` as `tap` (and keep their
+  click listener for TalkBack). On a long-press `hold()` runs; if it returns false (the mic
+  during a take, or any bar part) the bubble is "picked up": a haptic buzz, then any move drags
+  without the slop. Before this, only the mic dragged, and holding still past the long-press
+  timeout blocked the drag. The idle mic's long-press still inserts the last transcript and
+  does not drag. New prefs: `bubbleBarAlpha` (`bubble_bar_alpha`, 20–100 %, default 100: the
+  bar's `GradientDrawable` alpha only, so the mic and buttons stay opaque) and `bubbleColor`
+  (`bubble_color`, ARGB, one of `Prefs.BUBBLE_COLORS`: in Parlance brown `#6D4C41` first and default,
+  then Hebrish blue `#24527A` (Hebrish's default, its old fixed `R.color.accent`), green `#0F6B5C`, purple, orange, slate, black; no red, which means
+  recording). Compiled with `assembleDebug` (V, 2026-10-20, JDK 21: `JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64`,
+  the shell's default `JAVA_HOME` points at a missing JDK 17 path); not run on a device (I).
 - **Missed field (0.4.0):** when `deliver` finds no editable focused node, or the node refuses
   both SET_TEXT and PASTE, the text goes into `pending` (appended if something is already
   waiting) and onto the clipboard, and the bar shows **Insert** + ×. Insert runs the same
@@ -357,7 +371,7 @@ to it. Losing it means users must uninstall before installing a newer APK.
 ## Not yet verified (as of 2026-10-20)
 
 - 0.4.0 on a device: the floating mic in ChatGPT and other Compose apps, segment cuts and joins, the trim on quiet speakers, the Stop-to-text time,
-  the download queue, the new screens, Insert after a missed field, the brown idle colour.
+  the download queue, the new screens, Insert after a missed field, the colour choice (brown default).
 
 - The floating mic (0.3.0) on any device: recording from the service, insertion in Gmail,
   WhatsApp, Chrome and a Compose app, the paste fallback, drag and snap, rotation.

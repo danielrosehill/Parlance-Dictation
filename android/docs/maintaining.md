@@ -28,8 +28,8 @@ The code-switching model entry is the same in both catalogues: `Hebrish/Jachnun-
 `manifest_url` on `cdn.hebrish.app`. Parlance 0.2.0 still pointed at
 `danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching` `sherpa-onnx/int8/`, which is gated:
 `resolve/main/.../tokens.txt` returned HTTP 401 on 2026-10-20 (V, curl), so that model could not be
-downloaded in Parlance 0.2.0. The HF API reports `gated: "manual"` for the mirror too; the app downloads
-from the CDN (`latest.json` → `base_url`), which is open (V, 2026-10-20).
+downloaded in Parlance 0.2.0. The mirror is gated as well (`resolve/main/tokens.txt` → 401, V 2026-10-20), so the CDN
+(`latest.json` → `base_url`, open, V 2026-10-20) is the only source that works.
 
 Upgrading from 0.2.0: prefs keys and file names are unchanged, so settings and the stock model carry over.
 A code-switching v3/v4 download from the gated repo stays usable; the next check offers v1.0 from the CDN.

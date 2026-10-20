@@ -38,9 +38,11 @@ re-downloaded. Version folders under `models/<model>/<version>/` on the CDN neve
 version is a new folder plus a new `latest.json` (cache 5 min). `repo` stays in the entry for
 apps up to 0.2.1. Uploading: the `r2-upload` skill (parakeet-finetune-ops).
 
+**2026-10-20: the mirror is gated too (V, curl: `resolve/main/tokens.txt` → 401; HF API `gated: "manual"`), so `manifest_url` (the CDN) is the only working source; apps without it cannot download the code-switching model.**
+
 **2026-10-19: moved to the mirror.** The main repo `danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching`
 became **gated** (manual access requests), so its `sherpa-onnx/int8/` returns 401 to the apps.
-The catalogue now points at the ungated mirror `Hebrish/…-sherpa-onnx-int8`, files at the root,
+The catalogue now points at the mirror `Hebrish/…-sherpa-onnx-int8`, files at the root,
 with a `version.json` added there (`{"version": "v1.0", "run": "r6-en30"}`, HF commit `bb137e50`).
 Apps that read the catalogue follow it on their next update check; Parlance's catalogue only followed on 2026-10-20 (desktop 0.3.0, Android 0.4.0), so Parlance up to
 desktop 0.2.0 / Android 0.2.0 still read the main repo; older builds that hard-code the main repo path (Voice To Hebrish, Parlance 0.1.x) cannot download the

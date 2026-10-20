@@ -127,7 +127,7 @@ side.
 | --- | --- |
 | Base | [`nvidia/parakeet-tdt-0.6b-v2`](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) (v2 on purpose, not v3) |
 | Stock | [`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8), files at the repo root |
-| Code-switching | [`Hebrish/Jachnun-sherpa-onnx-int8`](https://huggingface.co/Hebrish/Jachnun-sherpa-onnx-int8), the ungated Hebrish mirror (the main repo is gated), downloaded from the Hebrish CDN via `manifest_url` (since 0.4.0; before that the gated repo, which returned 401) |
+| Code-switching | [`Hebrish/Jachnun-sherpa-onnx-int8`](https://huggingface.co/Hebrish/Jachnun-sherpa-onnx-int8), Hebrish's mirror, listed for older apps; the files download from the Hebrish CDN via `manifest_url` (since 0.4.0). Both HF repos are gated (401 on 2026-10-20) |
 | Format | sherpa-onnx int8 (encoder, decoder, joiner, tokens), about 660 MB per model |
 | Offline fallback (`ModelStore.BUNDLED`) | stock v2 at rev `1ab9323565dd`; code-switching v1.0 at rev `bb137e504b97` of the mirror (since 0.4.0). Used only when HF can't be reached on a first download |
 | Runtime | [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) 1.13.8 Android AAR, CPU, greedy search |

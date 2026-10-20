@@ -1,11 +1,11 @@
 # Parlance for Android: on-device voice keyboard
 
-[![Download APK v0.2.0](https://img.shields.io/badge/Download_APK-v0.2.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.2.0/Parlance-v0.2.0.apk)
+[![Download APK v0.4.0](https://img.shields.io/badge/Download_APK-v0.4.0-24527A?logo=android)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.4.0/Parlance-v0.4.0.apk)
 
 > **Early testing build.** Not yet run on a device under this name; see
 > [`docs/maintaining.md`](docs/maintaining.md) for what is verified.
 
-**What it does.** An Android voice input method (IME) running NVIDIA **Parakeet TDT 0.6B v2**
+**What it does.** An Android voice input method (IME), plus an optional floating mic for any app, running NVIDIA **Parakeet TDT 0.6B v2**
 **fully on the phone**. You choose which model it uses (below). Nothing you say is sent
 anywhere; the only network use is downloading a model from Hugging Face and checking for a
 newer version of it.
@@ -27,20 +27,26 @@ The list comes from [`../shared/models.json`](../shared/models.json). The APK ca
 and every update check fetches the current one from GitHub, so a model published later
 shows up without installing a new APK. "Coming soon" models are listed but can't be picked.
 
-Picking a model in **1. Model** switches the keyboard to it at once. If it isn't on the phone
-yet, the screen offers **Download** (about 660 MB per model, once). Models you downloaded
-earlier stay on the phone, so switching back is instant; **Delete other models…** removes
-them.
+The app is a home screen with one screen per area (since 0.4.0): **Models**, **Voice keyboard**,
+**Floating mic** (with a step-by-step guide to turning it on), **Dictation** and **Help and links**.
+
+**Models** downloads any model whether or not it is the one in use: one at a time, or all of them
+with **Download all** (they queue and download one after another; about 660 MB each). **Use this
+model** switches the keyboard and floating mic to a downloaded model at once; models stay on the
+phone until you **Delete** them, so switching back is instant.
+
+**Help and links** opens GitHub issues for bug reports and feature requests, the model card,
+the source, [hebrish.app](https://hebrish.app) (the code-switching model's website) and the terms.
 
 ## Install (recommended setup)
 
 1. Install **[HeliBoard](https://github.com/Helium314/HeliBoard/releases)** and make it your
    main keyboard.
 2. Download the APK from the
-   [APK (v0.2.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.2.0/Parlance-v0.2.0.apk)
+   [APK (v0.4.0)](https://github.com/danielrosehill/Parlance-Dictation/releases/download/android-v0.4.0/Parlance-v0.4.0.apk)
    and install it. You will need to allow installs from your browser or file manager.
 3. Open **Parlance** and work through it:
-   - **Pick a model** and **Download** it. It is about 660 MB, downloaded once; use Wi-Fi.
+   - **Models**: **Download** a model (or **Download all**). It is about 660 MB, downloaded once; use Wi-Fi.
      The download resumes if interrupted and is checked against SHA-256.
    - Optional, **Model location → Choose folder**: keep the model in a shared folder
      (internal storage or SD card) instead of app storage, so other on-device ASR apps can
@@ -52,7 +58,7 @@ them.
      sherpa-onnx NeMo transducer. Already-downloaded models are copied there; a model already
      present there is used as is.
    - **Model updates**: when a newer version of the selected model is published on Hugging
-     Face, the setup screen shows **Update to vN**. The new model downloads alongside the old one, which you
+     Face, the Models screen shows **Update to vN**. The new model downloads alongside the old one, which you
      keep using until the new files have been downloaded and checked. Then the old one is
      deleted. The screen checks when you open it, or tap **Check for update**.
    - **Grant** the microphone.
@@ -77,15 +83,53 @@ Voice keyboard keys: previous keyboard · delete · **mic** · space · enter.
 - **Insert last transcript:** if no text field had focus when the transcript came back, it
   is kept, and this button types it in once you tap a field.
 
+## Floating mic (optional, since 0.4.0)
+
+A mic button that floats over every app, so you can dictate without switching keyboards at
+all: your regular keyboard stays up and the text goes straight into the field.
+
+- **Turn it on:** home → **Floating mic** → **Turn it on: step by step**. In short:
+  Accessibility settings → *Downloaded apps* → *Parlance floating mic* → on. On Android 13+ an
+  app installed from an APK is greyed out there: try once, then **App info** → ⋮ → *Allow
+  restricted settings* (the ⋮ item only appears after that first try), then turn it on. The
+  guide has a button for each settings page.
+- **Dictate:** tap a text field, tap the mic (brown, so it can't be mistaken for Hebrish's blue one
+  when both apps are installed) and talk. While a take is open the mic turns red
+  (it is now **Stop**) and a bar opens beside it with a timer, **Pause / Resume**, **Retake**
+  (throw the take away and start again) and **Discard**. **Stop** transcribes and puts the text
+  in at the cursor, with a space before it if needed. Takes can run 20 minutes (see Limits).
+- **Missed the field:** if no text field has focus when the text is ready, the mic shows
+  **Insert** (and ×). Tap a field, then **Insert**: the text goes in at its cursor. It is on
+  the clipboard as well.
+- **Where it sits:** drag the mic anywhere. With *Left edge* or *Right edge* it snaps to the
+  nearer edge when you let go; with *Anywhere* it stays exactly where you drop it. The Floating
+  mic screen sets the same things directly and moves the mic live: height in 0.1 % steps (plus
+  ▲ ▼ nudges of 0.5 %), place across the screen (*Anywhere*), gap from the edge (0–48 dp),
+  size (36–96 dp) and idle opacity.
+  The bar always opens towards the middle of the screen. *Show only while a text field is
+  focused* hides the mic the rest of the time.
+- **Long-press the idle mic** to insert the last transcript again.
+- **Keep it running:** the guide's *Keep it running* step lets Parlance run unrestricted on
+  battery. Without it, phones such as OnePlus can stop the floating mic in the background.
+- **Apps built with Jetpack Compose** (ChatGPT, for example): the floating mic searches for the
+  focused field more thoroughly than `findFocus` alone, which misses Compose fields.
+  No "display over other apps" permission is needed or used.
+- **Fields that refuse it** (some web pages and custom editors): the text is pasted from the
+  clipboard instead, and if that fails too it is held for **Insert** and left on the
+  clipboard. Password fields are never touched.
+
+It uses the same model and the same process as the voice keyboard; the two can be used side by
+side.
+
 ## Model details
 
 | | |
 | --- | --- |
 | Base | [`nvidia/parakeet-tdt-0.6b-v2`](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v2) (v2 on purpose, not v3) |
 | Stock | [`csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8`](https://huggingface.co/csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8), files at the repo root |
-| Code-switching | [`danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching`](https://huggingface.co/danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching), `sherpa-onnx/int8/`. The app downloads whatever version is on HF `main` |
+| Code-switching | [`Hebrish/Jachnun-sherpa-onnx-int8`](https://huggingface.co/Hebrish/Jachnun-sherpa-onnx-int8), the ungated Hebrish mirror (the main repo is gated), downloaded from the Hebrish CDN via `manifest_url` (since 0.4.0; before that the gated repo, which returned 401) |
 | Format | sherpa-onnx int8 (encoder, decoder, joiner, tokens), about 660 MB per model |
-| Offline fallback (`ModelStore.BUNDLED`) | stock v2 at rev `1ab9323565dd`; code-switching v3 at rev `92679110e821`. Used only when HF can't be reached on a first download |
+| Offline fallback (`ModelStore.BUNDLED`) | stock v2 at rev `1ab9323565dd`; code-switching v1.0 at rev `bb137e504b97` of the mirror (since 0.4.0). Used only when HF can't be reached on a first download |
 | Runtime | [sherpa-onnx](https://github.com/k2-fsa/sherpa-onnx) 1.13.8 Android AAR, CPU, greedy search |
 
 The fine-tunes are trained on a single speaker's voice, so expect them to work best for that
@@ -94,10 +138,14 @@ written in Latin script (the v2 tokenizer has no Hebrew characters).
 
 ## Limits
 
-- **Offline (whole-utterance) recognition.** Text appears after you stop, not while you
-  speak. Takes stop automatically at **90 s**.
+- **Offline recognition, decoded in pieces.** The model is not a streaming one, but since
+  0.4.0 a take is cut at pauses while you talk and each piece is transcribed straight away, so
+  after you stop only the last few seconds remain. By default the text goes in at Stop;
+  *Dictation → Type as you go* inserts each piece as soon as it is ready. Takes stop
+  automatically at **20 minutes** (90 s before 0.4.0).
 - The first transcription after the process starts loads the 650 MB encoder, which takes a
-  few seconds. Later ones are fast while Android keeps the app alive.
+  few seconds. The floating mic loads it when it starts and whenever a text field gets focus;
+  after that it stays in memory while Android keeps the app alive.
 - arm64-v8a phones only, Android 9 (API 28) or newer.
 
 ## Build

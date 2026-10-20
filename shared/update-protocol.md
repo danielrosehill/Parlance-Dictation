@@ -24,8 +24,28 @@ recognizer loads), `version_file`, `default` (the id selected on a fresh install
 | id | repo | subdir | label without version.json |
 | --- | --- | --- | --- |
 | `stock` | `csukuangfj/sherpa-onnx-nemo-parakeet-tdt-0.6b-v2-int8` (k2-fsa's int8 export of NVIDIA's release; static since 2025-08-16) | *(root)* | `v2` |
-| `codeswitch` | `danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching` | `sherpa-onnx/int8` | `rev <sha7>` |
+| `codeswitch` | `Hebrish/Jachnun-sherpa-onnx-int8` (since 2026-10-19; named `Hebrish/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching-sherpa-onnx-int8` until 2026-10-20, which redirects with 307) | *(root)* | `rev <sha7>` |
 | `tech`, `personal` | not published yet | | |
+
+**Since Hebrish 0.2.2 / Parlance desktop 0.3.0 and Android 0.4.0 (2026-10-20): the Hebrish CDN.** A catalogue entry may carry `manifest_url`; apps
+that know it use it in place of the Hugging Face API. One GET of
+`https://cdn.hebrish.app/models/parakeet-codeswitch/latest.json` returns `{schema, model,
+version, run, revision, base_url, files: {name: {size, sha256}}}`; each file is fetched from
+`base_url + name` (Range-resumable, SHA-256 checked as before; `tokens.txt` has `sha256: null`,
+checked by size, like the HF tree). `revision` is kept equal to the HF commit the files came
+from, so an install from Hugging Face is the same version (`v1.0-bb137e504b97`) and is not
+re-downloaded. Version folders under `models/<model>/<version>/` on the CDN never change; a new
+version is a new folder plus a new `latest.json` (cache 5 min). `repo` stays in the entry for
+apps up to 0.2.1. Uploading: the `r2-upload` skill (parakeet-finetune-ops).
+
+**2026-10-19: moved to the mirror.** The main repo `danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching`
+became **gated** (manual access requests), so its `sherpa-onnx/int8/` returns 401 to the apps.
+The catalogue now points at the ungated mirror `Hebrish/…-sherpa-onnx-int8`, files at the root,
+with a `version.json` added there (`{"version": "v1.0", "run": "r6-en30"}`, HF commit `bb137e50`).
+Apps that read the catalogue follow it on their next update check; Parlance's catalogue only followed on 2026-10-20 (desktop 0.3.0, Android 0.4.0), so Parlance up to
+desktop 0.2.0 / Android 0.2.0 still read the main repo; older builds that hard-code the main repo path (Voice To Hebrish, Parlance 0.1.x) cannot download the
+code-switching model any more. **A model release must now update the mirror and its
+`version.json`**, not just the main repo. The paragraph below describes the layout before the move.
 
 For `codeswitch`, the fine-tune repo's `export_sherpa` writes the four files plus
 `version.json`. **Don't move that folder**: installed apps (including Voice To Hebrish, the

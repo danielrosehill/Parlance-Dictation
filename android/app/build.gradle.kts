@@ -40,8 +40,8 @@ android {
         applicationId = "com.danielrosehill.parlance"
         minSdk = 28
         targetSdk = 35
-        versionCode = 4
-        versionName = "0.2.0"
+        versionCode = 8
+        versionName = "0.4.0"
         // Phones only: x86 libs would add ~25 MB for emulator use nobody needs here.
         ndk { abiFilters += "arm64-v8a" }
     }
@@ -68,6 +68,9 @@ android {
     }
 
     sourceSets["main"].assets.srcDir(catalogueDir)
+    // The engine (catalogue, model store and download, recorder, transcriber) lives in
+    // ../core, the same layout as Hebrish (Hebrish-ASR/Hebrish-App) so the engine syncs file for file; see core/README.md.
+    sourceSets["main"].java.srcDir("../core/src/main/java")
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

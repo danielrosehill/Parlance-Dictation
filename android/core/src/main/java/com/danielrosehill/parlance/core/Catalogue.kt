@@ -1,4 +1,4 @@
-package com.danielrosehill.parlance
+package com.danielrosehill.parlance.core
 
 import android.content.Context
 import org.json.JSONObject
@@ -25,9 +25,11 @@ object Catalogue {
         val card: String?,
         /** Label for a repo with no version.json (the stock export); else "rev <sha7>". */
         val versionLabel: String?,
+        /** CDN manifest (cdn.hebrish.app for the code-switching model); preferred over [repo] when set. */
+        val manifestUrl: String? = null,
     ) {
         /** Listed but not downloadable: "planned" models show as coming soon. */
-        val available: Boolean get() = status == "available" && !repo.isNullOrEmpty()
+        val available: Boolean get() = status == "available" && !(repo.isNullOrEmpty() && manifestUrl.isNullOrEmpty())
     }
 
     data class Data(
@@ -43,7 +45,7 @@ object Catalogue {
     fun get(ctx: Context): Data {
         cached?.let { return it }
         val app = ctx.applicationContext
-        val data = Prefs.catalogueJson(app)?.let(::parse)
+        val data = ModelPrefs.catalogueJson(app)?.let(::parse)
             ?: parse(app.assets.open(ASSET).bufferedReader().use { it.readText() })
             ?: throw IllegalStateException("bundled $ASSET does not parse")
         cached = data
@@ -55,7 +57,7 @@ object Catalogue {
     /** The model the keyboard uses: the user's pick if still available, else the catalogue default. */
     fun selected(ctx: Context): Model {
         val data = get(ctx)
-        val pick = Prefs.selectedModel(ctx)?.let { id -> data.models.firstOrNull { it.id == id && it.available } }
+        val pick = ModelPrefs.selectedModel(ctx)?.let { id -> data.models.firstOrNull { it.id == id && it.available } }
         return pick ?: data.models.firstOrNull { it.id == data.default && it.available }
             ?: data.models.first { it.available }
     }
@@ -77,6 +79,7 @@ object Catalogue {
                 subdir = m.optString("subdir").trim('/'),
                 card = m.optString("card").ifEmpty { null },
                 versionLabel = m.optString("version_label").ifEmpty { null },
+                manifestUrl = m.optString("manifest_url").ifEmpty { null },
             )
         }
         if (models.none { it.available }) return null
@@ -103,7 +106,7 @@ object Catalogue {
             }
         }.getOrNull() ?: return
         val data = parse(text) ?: return
-        Prefs.setCatalogueJson(ctx.applicationContext, text)
+        ModelPrefs.setCatalogueJson(ctx.applicationContext, text)
         cached = data
     }
 }

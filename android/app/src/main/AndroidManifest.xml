@@ -11,6 +11,9 @@
         tools:ignore="ScopedStorage" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="29" />
+    <!-- The floating mic guide's "Keep it running" step asks to be exempt from battery
+         optimisation, so OxygenOS and similar don't kill the accessibility service (0.4.0). -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
     <application
         android:allowBackup="false"
@@ -29,6 +32,14 @@
             </intent-filter>
         </activity>
 
+        <!-- Screens reached from home (0.4.0); Up returns to MainActivity. -->
+        <activity android:name=".ModelsActivity" android:exported="false" android:label="@string/title_models" android:parentActivityName=".MainActivity" />
+        <activity android:name=".KeyboardActivity" android:exported="false" android:label="@string/title_keyboard" android:parentActivityName=".MainActivity" />
+        <activity android:name=".FloatingMicActivity" android:exported="false" android:label="@string/title_bubble" android:parentActivityName=".MainActivity" />
+        <activity android:name=".FloatingMicGuideActivity" android:exported="false" android:label="@string/title_guide" android:parentActivityName=".MainActivity" />
+        <activity android:name=".DictationActivity" android:exported="false" android:label="@string/title_dictation" android:parentActivityName=".MainActivity" />
+        <activity android:name=".ContactActivity" android:exported="false" android:label="@string/title_contact" android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".TryActivity"
             android:exported="false"
@@ -46,6 +57,20 @@
             <meta-data
                 android:name="android.view.im"
                 android:resource="@xml/method" />
+        </service>
+
+        <!-- The floating mic. Enabled by the user in Accessibility settings; nothing else can bind it. -->
+        <service
+            android:name=".FloatingMicService"
+            android:exported="false"
+            android:label="@string/a11y_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/floating_mic" />
         </service>
     </application>
 </manifest>

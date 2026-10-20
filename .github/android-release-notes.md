@@ -1,6 +1,8 @@
-**Parlance 0.2.0 for Android: Parlance is the general dictation app again.**
+**Parlance 0.4.0 for Android: level with Hebrish 0.4.0.**
 
-- Parlance and Hebrish are now separate apps. Parlance offers every model (stock Parakeet and the fine-tunes); Hebrish (Hebrish-ASR/Hebrish-Dictation) is for the English-Hebrew code-switching model.
-- App ID `com.danielrosehill.parlance`. If you installed **Hebrish 0.1.1 or 0.1.2**, this update installs over it: those builds used Parlance's app ID. Hebrish 0.2.0 and later have their own app ID and install alongside.
-- Otherwise unchanged from 0.1.0: choose the model, ~660 MB per model from Hugging Face, the Try it notepad, model updates with SHA-256 checks.
-- arm64-v8a only. Android 9+. Recommended with HeliBoard.
+- **Floating mic** (optional): a mic over every app, so you can dictate without switching keyboards. It is an accessibility service; the app walks you through turning it on. Drag it anywhere. Pause, Retake, Discard, and Insert when no field had focus. Brown, so it is easy to tell apart from Hebrish's.
+- **Long takes**: speech is cut at pauses and decoded while you talk, so only the last few seconds are left after Stop. The 90 s cap is now 20 minutes. *Type as you go* inserts each piece as it is ready.
+- **Faster to text**: silence is trimmed before decoding, and the model is warmed up when it loads.
+- **New screens**: a home screen, plus Models, Voice keyboard, Floating mic, Dictation, and Help and links. Download any model, or all of them, one after another.
+- **Code-switching model fixed**: it now downloads from the Hebrish CDN (v1.0). 0.2.0 pointed at a Hugging Face repo that is now gated, so that download failed.
+- Settings and the stock model carry over from 0.2.0. arm64-v8a only. Android 9+. Not yet run on a device.

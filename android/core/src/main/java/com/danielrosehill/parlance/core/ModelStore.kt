@@ -1,4 +1,4 @@
-package com.danielrosehill.parlance
+package com.danielrosehill.parlance.core
 
 import android.content.Context
 import org.json.JSONArray
@@ -23,7 +23,8 @@ object ModelStore {
 
     data class ModelFile(val name: String, val size: Long, val sha256: String?)
 
-    data class Manifest(val version: String, val revision: String, val files: List<ModelFile>) {
+    /** [baseUrl]: CDN folder the files download from (ends in '/'); null = Hugging Face `resolve`. */
+    data class Manifest(val version: String, val revision: String, val files: List<ModelFile>, val baseUrl: String? = null) {
         val totalBytes: Long get() = files.sumOf { it.size }
         val dirName: String get() = "$version-${revision.take(12)}"
 
@@ -38,6 +39,7 @@ object ModelStore {
         fun toJson(): String = JSONObject().apply {
             put("version", version)
             put("revision", revision)
+            if (baseUrl != null) put("base_url", baseUrl)
             put("files", JSONArray(files.map { f ->
                 JSONObject().put("name", f.name).put("size", f.size).put("sha256", f.sha256 ?: JSONObject.NULL)
             }))
@@ -51,7 +53,8 @@ object ModelStore {
                     val f = arr.getJSONObject(i)
                     ModelFile(f.getString("name"), f.getLong("size"), if (f.isNull("sha256")) null else f.getString("sha256"))
                 }
-                return Manifest(o.getString("version"), o.getString("revision"), files)
+                return Manifest(o.getString("version"), o.getString("revision"), files,
+                    o.optString("base_url").ifEmpty { null })
             }
         }
     }
@@ -72,14 +75,16 @@ object ModelStore {
                 ModelFile("tokens.txt", 9384, null),
             )
         ),
-        // v3, run r3-en30.
+        // v1.0, run r6-en30, on the Hebrish CDN (same files as Hebrish/...-sherpa-onnx-int8 at
+        // commit bb137e50, whose sha is kept as the revision so existing installs match).
         "codeswitch" to Manifest(
-            "v3", "92679110e821baf9425f620c9deb9920ce9b7539", listOf(
-                ModelFile("encoder.int8.onnx", 652282307, "b79474c430250d1dd34a2b0ff2f5f2bf6643faffe8b782519b3b0b5e98f42237"),
-                ModelFile("decoder.int8.onnx", 7257753, "bb625f0d27add1342c63e78ea6561331960f3fcef57221cc50c3a7691aa4bd68"),
-                ModelFile("joiner.int8.onnx", 1739080, "095c35c6ca595b65e1ec83aa561fd4207e1d3200ffe5a7473431e2a5da3c7fba"),
+            "v1.0", "bb137e504b9733fc582e03936477fe190dd4a464", listOf(
+                ModelFile("encoder.int8.onnx", 652282307, "aff69ffe1187d1c52a1c98ec2a4674a5cd9a1ea42af26c7576f4fbde0f877bb5"),
+                ModelFile("decoder.int8.onnx", 7257753, "682b2b4b99c4391fcb067199e5a39094cf69b83d3a3c26a6f6ac9f837148ec3c"),
+                ModelFile("joiner.int8.onnx", 1739080, "2afe3966a97ad97488b1e6a1ee32e73b1008e8adedfae10adae4a9c9fad1074a"),
                 ModelFile("tokens.txt", 9384, null),
-            )
+            ),
+            "https://cdn.hebrish.app/models/parakeet-codeswitch/v1.0/sherpa-onnx-int8/"
         ),
     )
 
@@ -87,33 +92,34 @@ object ModelStore {
 
     /** The model's last fully downloaded manifest, else its [BUNDLED] one; null if neither exists. */
     fun installed(ctx: Context, model: Catalogue.Model = sel(ctx)): Manifest? =
-        Prefs.installedManifest(ctx, model.id)?.let(Manifest::fromJson) ?: BUNDLED[model.id]
+        ModelPrefs.installedManifest(ctx, model.id)?.let(Manifest::fromJson) ?: BUNDLED[model.id]
 
     /** `a/b/c` from the non-empty parts: the stock model's files sit at the repo root (empty subdir). */
     private fun path(vararg parts: String) = parts.filter { it.isNotEmpty() }.joinToString("/")
 
     fun url(model: Catalogue.Model, m: Manifest, name: String) =
-        "https://huggingface.co/" + path(model.repo!!, "resolve", m.revision, model.subdir, name)
+        m.baseUrl?.let { it + name }
+            ?: ("https://huggingface.co/" + path(model.repo!!, "resolve", m.revision, model.subdir, name))
 
     /** Folder name inside a user-chosen location, so other apps can recognise what it holds. */
     fun sharedFolder(model: Catalogue.Model) = model.repo?.substringAfterLast('/') ?: model.id
 
     /**
      * The folder that holds one subfolder per version of [model]. App-private by default; under a
-     * user-chosen folder (Prefs.modelRoot) it gets its own subfolder, because pruneOld deletes
+     * user-chosen folder (ModelPrefs.modelRoot) it gets its own subfolder, because pruneOld deletes
      * everything else in it.
      */
-    fun base(ctx: Context, root: String? = Prefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx)) =
+    fun base(ctx: Context, root: String? = ModelPrefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx)) =
         if (root == null) File(File(ctx.filesDir, "models"), model.id) else File(root, sharedFolder(model))
 
-    fun dir(ctx: Context, root: String? = Prefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx),
+    fun dir(ctx: Context, root: String? = ModelPrefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx),
             m: Manifest? = installed(ctx, model)): File? =
         m?.let { File(base(ctx, root, model), it.dirName) }
 
     /** A file of the selected model; only meaningful once [isReady]. */
     fun file(ctx: Context, name: String) = File(dir(ctx) ?: throw IllegalStateException("no model"), name)
 
-    fun isReady(ctx: Context, root: String? = Prefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx),
+    fun isReady(ctx: Context, root: String? = ModelPrefs.modelRoot(ctx), model: Catalogue.Model = sel(ctx),
                 m: Manifest? = installed(ctx, model)): Boolean {
         val d = dir(ctx, root, model, m) ?: return false
         return m!!.files.all { File(d, it.name).let { f -> f.exists() && f.length() == it.size } }
@@ -130,9 +136,9 @@ object ModelStore {
      * may be another app's too, so only the version this app installed is removed there.
      */
     fun delete(ctx: Context, model: Catalogue.Model) {
-        if (Prefs.modelRoot(ctx) == null) base(ctx, null, model).deleteRecursively()
+        if (ModelPrefs.modelRoot(ctx) == null) base(ctx, null, model).deleteRecursively()
         else dir(ctx, model = model)?.deleteRecursively()
-        Prefs.setInstalledManifest(ctx, model.id, null)
+        ModelPrefs.setInstalledManifest(ctx, model.id, null)
     }
 
     /**
@@ -142,8 +148,9 @@ object ModelStore {
      * catalogue's `version_label` (the stock export has no version.json), else the short commit.
      */
     fun checkLatest(ctx: Context, model: Catalogue.Model = sel(ctx)): Manifest {
-        val repo = model.repo ?: throw java.io.IOException("${model.name} is not published yet")
         val names = Catalogue.get(ctx).files
+        model.manifestUrl?.let { return fromCdn(it, names) }
+        val repo = model.repo ?: throw java.io.IOException("${model.name} is not published yet")
         val sha = JSONObject(get("https://huggingface.co/api/models/$repo/revision/main")).getString("sha")
         val tree = JSONArray(get("https://huggingface.co/" + path("api/models", repo, "tree", sha, model.subdir)))
         val byName = (0 until tree.length()).map { tree.getJSONObject(it) }.associateBy { it.getString("path").substringAfterLast('/') }
@@ -159,6 +166,18 @@ object ModelStore {
         return Manifest(version, sha, files)
     }
 
+    /** One GET of the CDN manifest: {"version", "revision", "base_url", "files": {name: {size, sha256}}}. */
+    private fun fromCdn(manifestUrl: String, names: List<String>): Manifest {
+        val o = JSONObject(get(manifestUrl))
+        val fs = o.getJSONObject("files")
+        val files = names.map { name ->
+            val f = fs.optJSONObject(name) ?: throw java.io.IOException("$name missing from $manifestUrl")
+            ModelFile(name, f.getLong("size"), if (f.isNull("sha256")) null else f.getString("sha256"))
+        }
+        val base = o.getString("base_url").let { if (it.endsWith("/")) it else "$it/" }
+        return Manifest(o.getString("version"), o.getString("revision"), files, base)
+    }
+
     private fun get(url: String): String {
         val conn = URL(url).openConnection() as HttpURLConnection
         conn.connectTimeout = 15_000
@@ -172,7 +191,7 @@ object ModelStore {
     }
 
     /** Models whose installed version is complete under [root], in catalogue order. */
-    fun readyModels(ctx: Context, root: String? = Prefs.modelRoot(ctx)) =
+    fun readyModels(ctx: Context, root: String? = ModelPrefs.modelRoot(ctx)) =
         Catalogue.get(ctx).models.filter { it.available && isReady(ctx, root, it) }
 
     /**

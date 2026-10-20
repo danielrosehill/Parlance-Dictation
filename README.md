@@ -6,7 +6,7 @@ that suits how you talk: stock Parakeet, or a fine-tune of it.
 ![Parlance on Linux: the Model tab, choosing between stock Parakeet and the fine-tunes](docs/screenshots/desktop-model.png)
 
 **Parlance is the general-purpose app**: every model, for everyday dictation. Its sister
-project [**Hebrish**](https://github.com/Hebrish-ASR/Hebrish-Dictation) ([hebrish.app](https://hebrish.app))
+project [**Hebrish**](https://github.com/Hebrish-ASR/Hebrish-App) ([hebrish.app](https://hebrish.app))
 is built from the same code but is only for the English-Hebrew code-switching model. The two
 are separate apps with separate package names, app IDs, settings and default hotkeys, so they
 can be installed side by side (see [Parlance and Hebrish](#parlance-and-hebrish)).
@@ -22,7 +22,7 @@ run with sherpa-onnx (int8).
 | Model | Status | For |
 | --- | --- | --- |
 | **Parakeet (stock)** | available | General English, any speaker. NVIDIA's release, unchanged |
-| **English-Hebrew code-switching** | available | English with Hebrew words in it (*teudat zehut*, *arnona*, *bituach leumi*), written in Latin letters. [Model card](https://huggingface.co/danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching) |
+| **English-Hebrew code-switching** | available | English with Hebrew words in it (*teudat zehut*, *arnona*, *bituach leumi*), written in Latin letters. [Model card](https://hebrish.app/models#parakeet); downloaded from the Hebrish CDN |
 | **Technical vocabulary** | coming soon | Software, AI and infrastructure terms |
 | **Personal (general)** | coming soon | General English in the author's voice (Irish-accented), for slightly higher everyday accuracy |
 
@@ -31,9 +31,8 @@ one; stock Parakeet is the better choice for anyone else. Models marked *coming 
 in the apps by themselves once published: both apps re-read the catalogue
 ([`shared/models.json`](shared/models.json)) from this repo when they check for updates.
 
-On held-out recordings, the code-switching model (v3, the latest benchmarked version) cut
-word error rate on code-switched English from 10.9% to 5.3%, and plain English got slightly
-better, not worse. Training data, every version's results and the roadmap:
+On held-out recordings, the code-switching model (v1.0, benchmarked 2026-10-19) cut word
+error rate on code-switched English from 11.3% to 5.1%, and plain English got better, not worse. Training data, every version's results and the roadmap:
 [English-Hebrew-Codeswitching-Parakeet-Finetune](https://github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune).
 
 ## Download
@@ -65,9 +64,11 @@ model. Details: [`desktop/README.md`](desktop/README.md).
 
 ## Android app
 
-A voice keyboard (IME). Open the app, pick a model, and tap **Try it now** to test it in a
-built-in notepad before setting anything up. Once it's set up, HeliBoard's mic key opens it,
-you talk, and you're returned to HeliBoard with the text inserted. Details:
+A voice keyboard (IME) and an optional **floating mic** that sits over any app, so you can
+dictate without switching keyboards. Open the app, download a model, and tap **Try it** to test
+it in a built-in notepad before setting anything up. HeliBoard's mic key opens the voice
+keyboard; the floating mic types straight into the field you are in. Long takes are decoded in
+pieces while you talk, so the text is ready soon after you stop (takes up to 20 minutes). Details:
 [`android/README.md`](android/README.md).
 
 ## Repository layout
@@ -75,7 +76,7 @@ you talk, and you're returned to HeliBoard with the text inserted. Details:
 | Path | What |
 | --- | --- |
 | `desktop/` | Linux + Windows app (Python, PySide6, sherpa-onnx). Only the hotkey and paste code differs per OS |
-| `android/` | Android voice keyboard (Kotlin, sherpa-onnx AAR) |
+| `android/` | Android voice keyboard and floating mic (Kotlin, sherpa-onnx AAR); the engine is in `android/core/`, shared file for file with Hebrish |
 | `shared/models.json` | The model catalogue both apps bundle and re-fetch; a test fails if either app's copy drifts |
 | `shared/update-protocol.md` | How models are listed, downloaded and updated, and the quirks both apps work around |
 
@@ -91,7 +92,7 @@ every identifier, so that both can be installed together:
 | | Parlance | Hebrish |
 | --- | --- | --- |
 | Purpose | General dictation, every model | The English-Hebrew code-switching model only |
-| Repo | `danielrosehill/Parlance-Dictation` | `Hebrish-ASR/Hebrish-Dictation` |
+| Repo | `danielrosehill/Parlance-Dictation` | `Hebrish-ASR/Hebrish-App` |
 | Debian package / command | `parlance` | `hebrish` |
 | Android app ID | `com.danielrosehill.parlance` | `app.hebrish.dictation` |
 | Linux config / data | `~/.config/parlance`, `~/.local/share/parlance` | `~/.config/hebrish`, `~/.local/share/hebrish` |
@@ -108,7 +109,7 @@ Hebrish 0.2.0 and later are a separate install.
 ## History
 
 Parlance (2026-10-19) is the successor to all of the author's earlier Parakeet dictation
-apps, and the general-purpose one ([Hebrish](https://github.com/Hebrish-ASR/Hebrish-Dictation) is its code-switching sibling):
+apps, and the general-purpose one ([Hebrish](https://github.com/Hebrish-ASR/Hebrish-App) is its code-switching sibling):
 
 - **Voice To Hebrish** (2026-10-18), the Android + desktop monorepo this repo was copied
   from, history included. It ran only the code-switching model.

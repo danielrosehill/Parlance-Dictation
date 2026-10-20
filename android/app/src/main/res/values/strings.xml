@@ -3,26 +3,18 @@
     <string name="ime_name">Parlance</string>
     <string name="subtype_label">English (voice)</string>
 
-    <string name="url_heliboard">https://github.com/Helium314/HeliBoard/releases</string>
+    <string name="url_heliboard">https://github.com/HeliBorg/HeliBoard/releases</string>
     <string name="url_source">https://github.com/danielrosehill/Parlance-Dictation</string>
+    <string name="url_terms">https://hebrish.app/terms</string>
+    <string name="download_terms">The code-switching model is Hebrish\'s. By downloading it you agree to the Hebrish terms of use: free for personal and non-commercial use; commercial use, including telephony, needs a licence.</string>
+    <string name="terms_title">Terms of use</string>
+    <string name="terms_body">Stock Parakeet is NVIDIA\'s release under its own licence (CC-BY-4.0, see its model card). The code-switching model is Hebrish\'s, free for personal, research, education and non-profit use; commercial use, including telephony and call centres, needs a licence: access-requests@hebrish.app. The fine-tunes are experimental and trained on one speaker\'s voice; transcripts can be wrong, so check them before relying on them. It is provided as is, without warranty. Your audio stays on this phone.</string>
+    <string name="open_terms">Read the terms of use</string>
 
     <string name="intro">On-device voice typing with NVIDIA Parakeet TDT 0.6B v2. Choose the stock model or a fine-tune. Recognition runs on the phone; audio never leaves it.</string>
     <string name="version_line">App %1$s · %2$s %3$s (HF rev %4$s) · sherpa-onnx int8</string>
     <string name="version_line_none">App %1$s · %2$s · sherpa-onnx int8</string>
 
-    <string name="step_model">1. Model</string>
-    <string name="model_missing">%1$s is not downloaded. About %2$d MB from Hugging Face, once. Wi-Fi recommended.</string>
-    <string name="model_downloading">Downloading… %1$d / %2$d MB</string>
-    <string name="model_ready">%1$s %2$s ready (%3$d MB).</string>
-    <string name="model_pick_hint">The model the keyboard uses. Each one is a separate ~660 MB download; downloaded models stay until you delete them.</string>
-    <string name="model_option">%1$s (%2$s)\n%3$s</string>
-    <string name="model_coming_soon">coming soon</string>
-    <string name="model_downloaded">downloaded</string>
-    <string name="model_not_downloaded">not downloaded</string>
-    <string name="manage_models">Delete other models…</string>
-    <string name="manage_title">Downloaded models</string>
-    <string name="manage_item">%1$s (%2$d MB)</string>
-    <string name="manage_none">No other models are downloaded.</string>
     <string name="manage_confirm">Delete %1$s from this phone? You can download it again later.</string>
     <string name="delete">Delete</string>
     <string name="model_moving">Moving model… %1$d / %2$d MB</string>
@@ -31,10 +23,8 @@
     <string name="model_downloading_version">Downloading %1$s… %2$d / %3$d MB</string>
     <string name="check_update">Check for update</string>
     <string name="update_checking">Checking Hugging Face for a newer model…</string>
-    <string name="update_none">Up to date (latest on Hugging Face: %1$s).</string>
     <string name="update_available">Update available: %1$s (%2$d MB). %3$s stays in use until the new model is downloaded and verified, then it is deleted.</string>
     <string name="update_button">Update to %1$s</string>
-    <string name="update_failed">Update failed: %1$s. %2$s is still installed. Tap Update to resume.</string>
     <string name="update_check_failed">Couldn\'t check for updates: %1$s</string>
     <string name="cancel">Cancel</string>
     <string name="location_title">Model location</string>
@@ -44,12 +34,12 @@
     <string name="choose_location">Choose folder</string>
     <string name="reset_location">Use app storage</string>
 
-    <string name="step_mic">2. Microphone</string>
+    <string name="step_mic">Microphone</string>
     <string name="mic_ok">Granted.</string>
     <string name="mic_missing">Needed to hear you. Audio never leaves the phone.</string>
     <string name="grant">Grant</string>
 
-    <string name="step_ime">3. Keyboard</string>
+    <string name="step_ime">Turn on the keyboard</string>
     <string name="ime_enabled">Parlance is enabled.</string>
     <string name="ime_disabled">Not enabled yet. Turn on “Parlance” in the system keyboard list.</string>
     <string name="enable">Keyboard settings</string>
@@ -65,11 +55,16 @@
 
     <string name="step_try">Try it</string>
     <string name="try_hint">Tap here, switch to Parlance, and speak…</string>
-    <string name="links">Links</string>
+    <string name="links">Model and source</string>
     <string name="open_model">Model card</string>
     <string name="open_source">Source code</string>
+    <string name="contact_body">Report a bug or ask for a feature on GitHub. Using the code-switching model? Its website, hebrish.app, has the results, the datasets and the Hebrish app, which is built from the same code for that one model.</string>
+    <string name="link_bug">Report a bug</string>
+    <string name="link_feature">Request a feature</string>
+    <string name="link_hebrish">Hebrish website</string>
+    <string name="no_email_app">No email app found. Write to %1$s.</string>
 
-    <string name="ime_listening_time">Listening… %1$d:%2$02d (max %3$d s). Tap ■ to insert.</string>
+    <string name="ime_listening_time">Listening… %1$d:%2$02d. Tap ■ to insert.</string>
     <string name="ime_paused">Paused at %1$d:%2$02d. Resume, or tap ■ to insert.</string>
     <string name="ime_discarded">Take discarded. Tap the mic to speak.</string>
     <string name="ime_switch_after">Inserting, then switching back…</string>
@@ -103,6 +98,117 @@
     <string name="cd_backspace">Delete</string>
     <string name="cd_space">Space</string>
     <string name="cd_enter">Enter</string>
+    <!-- Floating mic (FloatingMicService) -->
+    <string name="a11y_label">Parlance floating mic</string>
+    <string name="a11y_description">Shows a floating microphone over other apps. Tap it to dictate into the text field you are in, without switching keyboards. Parlance reads the focused text field only to put your transcript in at the cursor, and it never reads password fields. Audio and text stay on this phone.</string>
+    <string name="bubble_body">A mic button that floats over every app. Tap it in any text field, talk, and tap Stop: the text goes in at the cursor and your keyboard stays as it is. While you talk it shows Pause, Retake and Discard. If no text field had focus when the text was ready, the mic shows Insert: tap a field, then Insert. Long-press the idle mic to insert the last transcript again. It runs as an accessibility service.</string>
+    <string name="bubble_on">The floating mic is on. Drag it to move it, or set its place below.</string>
+    <string name="bubble_off">The floating mic is off. Turn on “Parlance floating mic” in Accessibility settings, under Downloaded apps (or Installed apps). The guide below goes through it step by step.</string>
+    <string name="bubble_enable">Accessibility settings</string>
+    <string name="bubble_app_info">App info</string>
+    <string name="bubble_position">Position</string>
+    <string name="bubble_left">Left edge</string>
+    <string name="bubble_free">Anywhere</string>
+    <string name="bubble_right">Right edge</string>
+    <string name="bubble_only_typing">Show only while a text field is focused</string>
+    <string name="bubble_time">%1$d:%2$02d</string>
+    <string name="bubble_paused_time">Paused %1$d:%2$02d</string>
+    <string name="bubble_retake">Retake</string>
+    <string name="bubble_discarded">Take discarded.</string>
+    <string name="bubble_no_last">No transcript yet.</string>
+    <string name="bubble_insert">Insert</string>
+    <string name="bubble_insert_cd">Insert the transcript into the focused text field</string>
+    <string name="bubble_dismiss">Dismiss the transcript</string>
+    <string name="bubble_held">No text field to type into. Tap one, then tap Insert on the mic. The text is on the clipboard too.</string>
+    <string name="bubble_tap_field">Tap a text field first, then Insert.</string>
+    <string name="bubble_guide">How to turn it on</string>
+    <string name="bubble_guide_first">Turn it on: step by step</string>
+    <string name="bubble_how_title">How it works</string>
+    <string name="bubble_drag_hint">Left or right edge: the mic snaps to that edge when you drag it. Anywhere: it stays exactly where you drop it.</string>
+    <string name="bubble_height_fine">Height: %1$.1f%% from the top</string>
+    <string name="bubble_up">▲ Up</string>
+    <string name="bubble_down">▼ Down</string>
+    <string name="bubble_across">Across: %1$.1f%% from the left</string>
+    <string name="bubble_leftward">◀ Left</string>
+    <string name="bubble_rightward">Right ▶</string>
+    <string name="bubble_edge">Gap from the edge: %1$d dp</string>
+    <string name="bubble_size_dp">Size: %1$d dp</string>
+    <string name="bubble_alpha">Opacity when idle: %1$d%%</string>
+    <string name="bubble_options_hint">Long takes, and whether text goes in while you talk, are set on the Dictation screen.</string>
+    <string name="bubble_needs_mic">It also needs the microphone: see the guide.</string>
+    <string name="bubble_on_clipboard">This field doesn\'t accept dictation; the text is on the clipboard.</string>
+    <!-- Screens (0.4.0): home and the screens it links to -->
+    <string name="title_models">Models</string>
+    <string name="title_keyboard">Voice keyboard</string>
+    <string name="title_bubble">Floating mic</string>
+    <string name="title_guide">Turn on the floating mic</string>
+    <string name="title_dictation">Dictation</string>
+    <string name="title_contact">Help and links</string>
+    <string name="home_setup">Set up</string>
+    <string name="home_more">More</string>
+    <string name="nav_models">Models</string>
+    <string name="nav_keyboard">Voice keyboard</string>
+    <string name="nav_bubble">Floating mic</string>
+    <string name="nav_dictation">Dictation</string>
+    <string name="nav_dictation_summary">Long takes, and typing as you talk</string>
+    <string name="nav_contact">Help and links</string>
+    <string name="nav_contact_summary">Bug reports, feature requests, source, terms</string>
+    <string name="home_models_downloading">Downloading %1$s… %2$d / %3$d MB</string>
+    <string name="home_models_ready">In use: %1$s %2$s</string>
+    <string name="home_models_others">. %1$d more downloaded</string>
+    <string name="home_models_update">. Update available</string>
+    <string name="home_models_missing">%1$s is not downloaded yet. Tap to download.</string>
+    <string name="home_keyboard_on">On. Opens from your keyboard\'s mic key.</string>
+    <string name="home_keyboard_off">Not turned on yet</string>
+    <string name="home_bubble_on">On</string>
+    <string name="home_bubble_off">Off. Optional: a mic over every app.</string>
+
+    <string name="models_intro">Download any model, whether or not it is the one in use; each is about 660 MB, once. Downloads run one after another. The model in use is the one the keyboard and the floating mic transcribe with.</string>
+    <string name="models_download_all">Download all</string>
+    <string name="models_download_all_size">Download all (%1$d, about %2$d MB)</string>
+    <string name="models_all_downloaded">All models downloaded</string>
+    <string name="models_cancel_all">Cancel downloads</string>
+    <string name="models_in_use">%1$s (in use)</string>
+    <string name="model_coming_soon_long">Coming soon.</string>
+    <string name="models_queued">Waiting: downloads after the current one.</string>
+    <string name="models_downloaded">Downloaded: %1$s, %2$d MB.</string>
+    <string name="models_not_downloaded">Not downloaded. About %1$d MB.</string>
+    <string name="models_unqueue">Don\'t download</string>
+    <string name="models_use">Use this model</string>
+    <string name="models_updates">Updates</string>
+    <string name="models_updates_hint">New versions of downloaded models are looked for when the app opens, at most every 6 hours. A model being updated stays usable until the new version is downloaded and checked.</string>
+
+    <string name="keyboard_intro">A voice keyboard that opens from your regular keyboard\'s mic key, records, types the text in and switches back.</string>
+
+    <string name="guide_status_on">Done: the floating mic is on.</string>
+    <string name="guide_status_off">The floating mic is off. Go through the steps below; each button opens the right settings page, and this screen updates when you come back.</string>
+    <string name="guide_step1_title">1. Accessibility settings</string>
+    <string name="guide_step1">Open Accessibility settings, then Downloaded apps (on some phones Installed apps or Installed services), then Parlance floating mic. Turn it on and tap Allow. If that works, skip to the last step.</string>
+    <string name="guide_step2_title">2. Greyed out? Allow restricted settings</string>
+    <string name="guide_step2">Android 13 and later block accessibility for apps installed from an APK. Trying step 1 once shows a “Restricted setting” message; after that, open App info, tap ⋮ (top right), then Allow restricted settings, and confirm with your PIN or fingerprint. The ⋮ item only appears after that first try.</string>
+    <string name="guide_step3_title">3. Turn it on</string>
+    <string name="guide_step3">Back in Accessibility settings → Downloaded apps → Parlance floating mic, the switch now works. Turn it on and tap Allow.</string>
+    <string name="guide_mic_title">Microphone</string>
+    <string name="guide_mic">The floating mic records with the app\'s microphone permission.</string>
+    <string name="guide_battery_title">Keep it running</string>
+    <string name="guide_battery">Some phones (OnePlus, Xiaomi, Samsung and others) stop background apps to save battery, and the floating mic disappears until you turn it on again. Allow Parlance to run unrestricted. On OnePlus, also check App info → Battery → Unrestricted.</string>
+    <string name="guide_battery_button">Allow unrestricted battery</string>
+    <string name="guide_battery_on">Battery: unrestricted.</string>
+    <string name="guide_battery_off">Battery: optimised. Android may stop the floating mic.</string>
+    <string name="guide_done_title">Done</string>
+    <string name="guide_done">A mic now sits at the edge of the screen. Tap into a text field, tap the mic, talk, and tap it again. Drag it to move it.</string>
+    <string name="guide_position">Set where it sits</string>
+
+    <string name="dictation_long_title">Long dictation</string>
+    <string name="dictation_long">Takes can run up to %1$d minutes. While you talk, each stretch of speech is transcribed at the next pause, so when you tap stop only the last few seconds are left to do. The keyboard, the floating mic and Try it all work this way.</string>
+    <string name="dictation_type_as_you_go">Type as you go</string>
+    <string name="dictation_type_as_you_go_hint">Off: the whole take goes in when you tap stop, and Discard throws all of it away. On: each part goes in as soon as it is transcribed, so long dictations appear while you talk; Discard then only drops the part not yet typed.</string>
+    <string name="dictation_speed_title">Speed</string>
+    <string name="dictation_speed">The model is loaded once and kept in memory. The floating mic loads it as soon as a text field gets focus, so it is ready by the time you tap. Silence at the start and end of a take is skipped. The very first take after the phone restarts still waits a few seconds for the model to load.</string>
+    <string name="dictation_missed_title">If the text has nowhere to go</string>
+    <string name="dictation_missed">Floating mic: if no text field has focus when the text is ready, the mic shows Insert. Tap a field, then Insert, and the text goes in at the cursor. It is on the clipboard too. Voice keyboard: Insert last transcript does the same.</string>
+
+
     <!-- Try it (TryActivity) -->
     <string name="try_open">Try it now: no setup needed</string>
     <string name="try_open_hint">Hear what it does before you set it up as a keyboard.</string>
@@ -121,14 +227,14 @@
     <string name="try_copy">Copy</string>
     <string name="try_share">Share</string>
     <string name="try_clear">Clear</string>
-    <string name="try_setup">Use it in any app: back to setup</string>
+    <string name="try_setup">Use it in any app: back to the app</string>
     <string name="try_loading">Loading the model… (a few seconds, the first time only)</string>
     <string name="try_load_failed">Couldn\'t load the model: %1$s</string>
-    <string name="try_no_model">Download the model on the setup screen first (about 660 MB, one time).</string>
+    <string name="try_no_model">Download a model on the Models screen first (about 660 MB, one time).</string>
     <string name="try_ready">Ready. Tap the mic and talk.</string>
-    <string name="try_listening">Listening… %1$d:%2$02d (up to %3$d s). Tap to stop.</string>
+    <string name="try_listening">Listening… %1$d:%2$02d. Tap to stop.</string>
     <string name="try_transcribing">Transcribing…</string>
-    <string name="try_done">Done: %1$.1f s of speech in %2$.1f s. Tap the mic for more.</string>
+    <string name="try_done">Done: %1$.1f s of audio; the text was ready %2$.1f s after you tapped stop. Tap the mic for more.</string>
     <string name="try_nothing">Didn\'t catch any words. Try again a bit closer to the mic.</string>
     <string name="try_too_short">That was very short. Tap, talk, then tap again.</string>
     <string name="try_failed">Something went wrong: %1$s</string>

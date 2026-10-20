@@ -3,4 +3,8 @@
     <color name="ime_bg">#1F2124</color>
     <color name="ime_key">#33363B</color>
     <color name="ime_text">#E8EAED</color>
+    <!-- Floating mic when idle: brown, so it is told apart from Hebrish's (accent blue there) when both run. -->
+    <color name="bubble_idle">#6D4C41</color>
+    <!-- Floating mic while a take is open. -->
+    <color name="bubble_recording">#C62828</color>
 </resources>

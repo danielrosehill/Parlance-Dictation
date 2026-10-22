@@ -8,7 +8,7 @@
     <string name="url_terms">https://hebrish.app/terms</string>
     <string name="download_terms">The code-switching model is Hebrish\'s. By downloading it you agree to the Hebrish terms of use: free for personal and non-commercial use; commercial use, including telephony, needs a licence.</string>
     <string name="terms_title">Terms of use</string>
-    <string name="terms_body">Stock Parakeet is NVIDIA\'s release under its own licence (CC-BY-4.0, see its model card). The code-switching model is Hebrish\'s, free for personal, research, education and non-profit use; commercial use, including telephony and call centres, needs a licence: access-requests@hebrish.app. The fine-tunes are experimental and trained on one speaker\'s voice; transcripts can be wrong, so check them before relying on them. It is provided as is, without warranty. Your audio stays on this phone.</string>
+    <string name="terms_body">Stock Parakeet is NVIDIA\'s release under its own licence (CC-BY-4.0, see its model card). The code-switching model is Hebrish\'s, free for personal, research, education and non-profit use; commercial use, including telephony and call centres, needs a licence: access@hebrish.app. The fine-tunes are experimental and trained on one speaker\'s voice; transcripts can be wrong, so check them before relying on them. It is provided as is, without warranty. Your audio stays on this phone.</string>
     <string name="open_terms">Read the terms of use</string>
 
     <string name="intro">On-device voice typing with NVIDIA Parakeet TDT 0.6B v2. Choose the stock model or a fine-tune. Recognition runs on the phone; audio never leaves it.</string>

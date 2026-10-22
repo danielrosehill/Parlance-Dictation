@@ -38,7 +38,7 @@ checked by size, like the HF tree). `revision` is kept equal to the HF commit th
 from, so an install from Hugging Face is the same version (`v1.0-bb137e504b97`) and is not
 re-downloaded. Version folders under `models/<model>/<version>/` on the CDN never change; a new
 version is a new folder plus a new `latest.json` (cache 5 min). `repo` stays in the entry for
-apps up to 0.2.1. Uploading: the `r2-upload` skill (voice-ops).
+apps up to 0.2.1. Uploading: the `r2-upload` skill (voice-model-training).
 
 **2026-10-20: the mirror is gated too (V, curl: `resolve/main/tokens.txt` → 401; HF API `gated: "manual"`), so `manifest_url` (the CDN) is the only working source; apps without it cannot download the code-switching model.**
 

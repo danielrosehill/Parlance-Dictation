@@ -11,7 +11,7 @@ from .. import __version__, model_store
 HUB = "https://github.com/Hebrish-ASR/English-Hebrew-Codeswitching-Parakeet-Finetune"
 MODEL = "https://huggingface.co/danielrosehill/Parakeet-TDT-0.6B-v2-English-Hebrew-Codeswitching"
 LEADERBOARD = "https://huggingface.co/spaces/danielrosehill/English-Hebrew-Codeswitching-ASR-Leaderboard"
-DEMO = "https://huggingface.co/spaces/danielrosehill/English-Hebrew-Codeswitching-Parakeet-Demo"
+DEMO = "https://huggingface.co/spaces/Hebrish/Jachnun-Demo"
 SOURCE = "https://github.com/danielrosehill/Parlance-Dictation"
 
 BENCH_VERSION = "v1.0"        # latest benchmarked (2026-10-19)
